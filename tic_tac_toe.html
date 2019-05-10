@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe</title>
+    <style>
+        body {
+            font-family: "Times", Arial, sans-serif;
+            margin: 0 auto;
+            text-align: center;
+            color: #ffffff;
+            background: #454545;
+        }
+
+         table {
+            margin: 0 auto;
+            margin-top: 1em;
+            background-color: rgba(199, 222, 252, 0.96);
+            border-collapse: collapse;
+            width: 450px;
+        }
+
+         table td {
+            border: 3px solid #f0f0f0;
+            width: 50px;
+            height: 150px;
+        }
+
+         table td:before {
+            font-size: 4em;
+        }
+
+         table td.x:before {
+            content: "X";
+            color: #6ed716;
+        }
+
+         table td.o:before {
+            content: "O";
+            color: #ffb13e;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Tic-Tac-Toe</h1>
+        <div class="messages"></div>
+            <div class="turn"></div>
+                <table>
+                    <tr>
+                        <td class="patt1"></td>
+                        <td class="patt2"></td>
+                        <td class="patt3"></td>
+                    </tr>
+                    <tr>
+                        <td class="patt4"></td>
+                        <td class="patt5"></td>
+                        <td class="patt6"></td>
+                    </tr>
+                    <tr>
+                        <td class="patt7"></td>
+                        <td class="patt8"></td>
+                        <td class="patt9"></td>
+                    </tr>
+            </table>
+    <br><br>
+    <input class="restart" type="button" value="Clear" />
+
+    <script src="js/jquery-2.2.4.js"></script>
+
+    <script>
+        $(function() {
+
+            var player = 1;
+            var table = $('table');
+            var messages = $('.messages');
+            var turn = $('.turn');
+            displayNextPlayer(turn, player);
+
+            $('td').click(function() {
+                td = $(this);
+                var state = getState(td);
+                if(!state) {
+                    var pattern = newPattern(player);
+                    changeState(td, pattern);
+                    if(didPlayerWin(table, pattern)) {
+                        messages.html('Player '+player+' Wins!');
+                        turn.html('');
+                    } else {
+                        player = changePlayer(player);
+                        displayNextPlayer(turn, player);
+                    }
+                }
+            });
+
+            $('.restart').click(function() {
+                player = 1;
+                messages.html('');
+                restart(table);
+                displayNextPlayer(turn, player);
+            });
+
+        });
+
+        function getState(td) {
+            if(td.hasClass('x') || td.hasClass('o')) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+
+        function changeState(td, pattern) {
+            return td.addClass(pattern);
+        }
+
+        function newPattern(player) {
+            if(player == 1) {
+                return 'x';
+            } else {
+                return 'o';
+            }
+        }
+
+        function changePlayer(player) {
+            if(player == 1) {
+                return player = 2;
+            } else {
+                return player = 1;
+            }
+        }
+
+        function displayNextPlayer(turn, player) {
+            turn.html('Player ' + player);
+        }
+
+        function didPlayerWin(table, pattern) {
+            var won = 0;
+                if(table.find('.patt1').hasClass(pattern) && table.find('.patt2').hasClass(pattern) && table.find('.patt3').hasClass(pattern)) {
+                    won = 1;
+                } else if (table.find('.patt1').hasClass(pattern) && table.find('.patt4').hasClass(pattern) && table.find('.patt7').hasClass(pattern)) {
+                    won = 1;
+                } else if (table.find('.patt1').hasClass(pattern) && table.find('.patt5').hasClass(pattern) && table.find('.patt9').hasClass(pattern)) {
+                    won = 1;
+                } else if (table.find('.patt4').hasClass(pattern) && table.find('.patt5').hasClass(pattern) && table.find('.patt6').hasClass(pattern)) {
+                    won = 1;
+                } else if (table.find('.patt7').hasClass(pattern) && table.find('.patt8').hasClass(pattern) && table.find('.patt9').hasClass(pattern)) {
+                    won = 1;
+                } else if (table.find('.patt2').hasClass(pattern) && table.find('.patt5').hasClass(pattern) && table.find('.patt8').hasClass(pattern)) {
+                    won = 1;
+                } else if (table.find('.patt3').hasClass(pattern) && table.find('.patt6').hasClass(pattern) && table.find('.patt9').hasClass(pattern)) {
+                    won = 1;
+                } else if (table.find('.patt3').hasClass(pattern) && table.find('.patt5').hasClass(pattern) && table.find('.patt7').hasClass(pattern)) {
+                    won = 1;
+                }
+            return won;
+        }
+
+        function restart(table) {
+            table.find('td').each(function() {
+                $(this).removeClass('o').removeClass('x');
+            });
+        }
+
+    </script>
+</body>
+</html>
