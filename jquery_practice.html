@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery Practice</title>
+</head>
+<body>
+<div class="container-fluid">
+    <h3 class="text-primary text-center">jQuery Playground</h3>
+    <div class="row">
+        <div class="col-xs-6">
+            <h4>Top</h4>
+            <div class="well" id="top">
+                <button class="btn btn-default target" id="target1">#target1</button>
+                <button class="btn btn-default target" id="target2">#target2</button>
+                <button class="btn btn-default target" id="target3">#target3</button>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <h4>Bottom</h4>
+            <div class="well" id="bottom">
+                <button class="btn btn-default target" id="target4">#target4</button>
+                <button class="btn btn-default target" id="target5">#target5</button>
+                <button class="btn btn-default target" id="target6">#target6</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-2.2.4.js"></script>
+<script>
+
+    // Change css of target1 from page using .css()
+    $(document).ready(function() {
+        $("#target1").css("color", "red");
+    });
+
+    // Append target2 to bottom using .appendTo()
+    $(document).ready(function() {
+        $('#target2').appendTo('#bottom');
+    });
+
+    // Remove element target4 from the page by using the .remove() function.
+    $(document).ready(function(){
+        $("#target4").remove();
+    });
+
+    // Clone target5 to top using .clone();
+    $(document).ready(function(){
+        $('#target5').clone().appendTo('#top');
+    });
+
+</script>
+</body>
+</html>

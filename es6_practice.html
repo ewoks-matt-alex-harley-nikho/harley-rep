@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6 Practice</title>
+</head>
+<body>
+
+
+<script>
+    var newCar = false;
+
+    var gettingANewCar = new Promise(
+        function (resolve, reject) {
+            if (newCar) {
+                var car = {
+                    Make: 'Nissan',
+                    Model: '370z'
+                };
+                resolve(phone); // fulfilled
+            } else {
+                var reason = new Error('not enough money');
+                reject(reason); // reject
+            }
+
+        }
+    );
+    var insurance = function () {
+        gettingANewCar
+            .then(function (fulfilled) {
+                console.log(fulfilled);
+            })
+            .catch(function (error) {
+                console.log(error.message);
+            });
+    };
+
+
+</script>
+</body>
+</html>
